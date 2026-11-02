@@ -11,7 +11,7 @@ function Search() {
 
   // 쿼리스트링에서 제공된 값을 가져올 때 써야 되는 함수 : useSearchParams()
   const [searchParams] = useSearchParams(); // 변형된 State 임
-  const keyword = searchParams.get("keyeword");
+  const keyword = searchParams.get("keyword");
 
   // 동적 라우팅을 통한 params와 searchParams의 큰 차이
   // params는 무조건 있음. searchParams는 있을 수도 있고 없을 수도 있음

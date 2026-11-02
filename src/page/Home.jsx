@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import styles from "./Home.module.css";
 
 function Home() {
