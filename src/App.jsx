@@ -1,0 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router";
+import Search from "./page/Search.jsx";
+import Home from "./page/Home.jsx";
+import Detail from "./page/Detail.jsx";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<Home />} />
+        <Route path={"/search"} element={<Search />} />
+        <Route path={"/detail"} element={<Detail />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
