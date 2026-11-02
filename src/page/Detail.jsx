@@ -1,4 +1,4 @@
 function Detail() {
-  return <></>
+  return <></>;
 }
 export default Detail;
