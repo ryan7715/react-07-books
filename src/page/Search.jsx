@@ -1,11 +1,9 @@
 import { useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 
-
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 function Search() {
-
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("keyword");
   const [list, setList] = useState([]);
@@ -17,26 +15,60 @@ function Search() {
     setLoading(true);
 
     fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=20&key=${API_KEY}`
+      `https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=20&key=${API_KEY}`,
     )
-        .then(res => res.json())
-        .then(json => setList(json.items))
-        .catch(err => console.log(err))
-    .finally(() => setLoading(false));
+      .then((res) => res.json())
+      .then((json) => setList(json.items))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, []);
 
-
-
   return (
-      <div>
-        <h3>검색 결과 : {keyword}</h3>
+    <div>
+      <h3>검색 결과 : {keyword}</h3>
 
-        {loading ? (
-            <div>로딩 중입니다...</div>
-        ) : (
-            list.length === 0 ? (<div>검색 결과가 없습니다</div>) : (<></>)
-        )}
-      </div>
+      {loading ? (
+        <div>로딩 중입니다...</div>
+      ) : list.length === 0 ? (
+        <div>검색 결과가 없습니다</div>
+      ) : (
+        list.map((item, index) => {
+          return(
+              <div key={index}>
+                <div key={index}>
+                  {/*
+                     표지를 출력하려고 했더니,
+                     표지가 없는 책이 있어서
+                     thumbnail에 접근 할 수가 없다고 에러가 발생함
+
+                     옵셔널 체이닝 연산지인 "?."을 통해서
+                     있으면 값을 불러오고, 없으면 말하고 표현함
+                  */}
+                </div>
+                <img
+                    src={item.volumeInfo.imageLinks.thumbnail}
+                    alt={item.volumeInfo.title}
+                />
+                <div>
+                  <div>{item.volumeInfo.title}</div>
+                  {/*
+                    authors는 array임
+                    그럼 map을 돌려서 표현해야 하는 가?
+                    .join() : array 안에 요소들을 하나로 합쳐주는 메서드
+                              string 요소가 들어왔을 때 가장 많이 씀
+
+                              const arr = ["홍길동", "김철수" "홍영희"]
+                              arr.join(".);    => "홍길동", "김철수", "홍영희"
+
+                    저자가 없는 경우가 발생됨 => 옵셔널 체이닝 연산자
+                  */}
+                  <div>{item.volumeInfo.authors}</div>
+                </div>
+              </div>
+          )
+        })
+      )}
+    </div>
   );
 }
 
