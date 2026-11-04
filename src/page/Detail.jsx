@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { API_KEY } from "./Search.jsx";
+import styles from "./Detail.module.css";
 
 function Detail() {
   // 사용자가 원하는 책의 상제를 출력
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
   // 사용자가 원하는 책은 무엇인가  => 책의 ID를 알아야 되는 구나
   const { id } = useParams();
@@ -26,15 +27,16 @@ function Detail() {
   // book의 값이 있는지 없는지만 체크해줘도 화면을 달리 그려줄 수 있음
 
   if (!book) {
-    return <div>LOADING...</div>;
+    return <div className={styles.container}>LOADING...</div>;
   }
 
   // 전 단계의 화면은 /search?keyword=검색 키워드
   // Link to={"전 단계의 주소"}
 
   return (
-    <div>
+    <div className={styles.container}>
       <button
+        className={styles.backBtn}
         onClick={() => {
           // 사용자를 이동시키기 위해 뭘 써야되느냐
           navigate(-1);
@@ -45,11 +47,12 @@ function Detail() {
       <h2>{book.volumeInfo.title}</h2>
       {book.volumeInfo.imageLinks ? (
         <img
+          className={styles.cover}
           src={book.volumeInfo.imageLinks.thumbnail}
           alt={book.volumeInfo.title}
         />
       ) : (
-        <div>No Cover</div>
+        <div className={styles.no_cover}>No Cover</div>
       )}
       <p>{book.volumeInfo.authors?.join(", ")}</p>
       {/*
