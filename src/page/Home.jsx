@@ -26,7 +26,7 @@ function Home() {
     // 우리는 지금 string을 "주소"로 이동시키고있는 상황
     // URL은 사실 "영어"와 정해진 특수문자만 가능 => 시용자가 input에 어떤 걸 할지 모르기 때문에 변환이 필요
     // string을 "주소"에 표현하기 위해 변환 작업을 해주는 명령encodeURIComponent(스트링)
-    navigate()
+    navigate(`/search?keyword=${encodeURIComponent(k)}`)
 
   }
 
