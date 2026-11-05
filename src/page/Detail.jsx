@@ -44,6 +44,7 @@ function Detail() {
       >
         &larr; 뒤로 가기
       </button>
+
       <h2>{book.volumeInfo.title}</h2>
       {book.volumeInfo.imageLinks ? (
         <img
