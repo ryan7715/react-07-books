@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 import styles from "./Search.module.css";
 
@@ -39,9 +39,26 @@ function Search() {
       .finally(() => setLoading(false));
   }, [keyword]);
 
+  const navigate =useNavigate();
+  const [input, setInput] = useState("")
+
+  const onChangeHandler = (event) => setInput(event.target.value);
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    const k = input.trim();
+    if (!k) return;
+
+    navigate(`/serch?keyword=${encodeURIComponent(k)}`);
+  }
+
   return (
     <div className={styles.container}>
       <h3>검색 결과 : {keyword}</h3>
+
+      <form onSubmit={onSubmitHandler}>
+        <input onChange={onChangeHandler} value={input} />
+        <button type={"submit"}>검색</button>
+      </form>
 
       {loading ? (
         <div className={styles.message}>로딩 중입니다...</div>
