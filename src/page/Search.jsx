@@ -45,7 +45,7 @@ function Search() {
       .finally(() => setLoading(false));
   }, [keyword]);
 
-  // 검색 결과를 담당하는 Search 컴포너트에서도
+  // 검색 결과를 담당하는 Search 컴포넌트에서도
   // 검색이 가능하도록 쉽게 변경하니,
   // Home에 있는 내용과 다르지 않음을 확임
   //               => 컴포넌트 분리 고려
@@ -64,7 +64,7 @@ function Search() {
     <div className={styles.container}>
       <h3>검색 결과 : {keyword}</h3>
 
-      <SearchBar />
+      <SearchBar keyword={keyword} />
 
       {loading ? (
         <div className={styles.message}>로딩 중입니다...</div>

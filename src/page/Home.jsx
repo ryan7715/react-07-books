@@ -7,7 +7,7 @@ function Home() {
   return (
     <div className={styles.container}>
       <span className={styles.title}>Google Books 검색</span>
-      <SearchBar />
+      <SearchBar keyword={""} />
     </div>
   );
 }

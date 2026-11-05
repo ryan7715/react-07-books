@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import styles from "./SearchBar.module.css";
 
-function SearchBar() {
+function SearchBar({ keyword }) {
   const navigate = useNavigate();
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(keyword || "");
 
   const onChangeHandler = (event) => setInput(event.target.value);
 
